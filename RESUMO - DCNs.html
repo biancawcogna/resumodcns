@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Interativo - Licenciaturas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .search-bar {
+            padding: 20px 30px;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e9ecef;
+        }
+
+        .search-bar input {
+            width: 100%;
+            padding: 15px 20px;
+            font-size: 16px;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .search-bar input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 3px solid #dee2e6;
+            overflow-x: auto;
+            padding: 0 20px;
+        }
+
+        .tab {
+            padding: 20px 30px;
+            cursor: pointer;
+            border: none;
+            background: none;
+            font-size: 16px;
+            font-weight: 600;
+            color: #6c757d;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -3px;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+        }
+
+        .tab.active {
+            color: #667eea;
+            border-bottom-color: #667eea;
+        }
+
+        .content {
+            padding: 30px;
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .info-card h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .info-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info-card ul li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .info-card ul li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+
+        .comparison-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .alert {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .alert-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            color: #856404;
+        }
+
+        .alert-info {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            color: #0c5460;
+        }
+
+        .alert-success {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            color: #155724;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .badge-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .badge-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-warning {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .badge-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .checklist {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .checklist-item {
+            padding: 12px;
+            margin: 8px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
+            margin: 30px 0 20px 0;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            font-size: 1.2em;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .tabs {
+                padding: 0 10px;
+            }
+            
+            .tab {
+                padding: 15px 20px;
+                font-size: 14px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Guia Interativo - Licenciaturas</h1>
+            <p>DCNs e Marco Regulatório EAD | Coordenação de Cursos</p>
+        </div>
+
+        <div class="tabs">
+            <button class="tab active" data-tab="visao-geral">Visão Geral</button>
+            <button class="tab" data-tab="pedagogia">Pedagogia</button>
+            <button class="tab" data-tab="biologia">C. Biológicas</button>
+            <button class="tab" data-tab="letras">Letras</button>
+            <button class="tab" data-tab="quimica">Química</button>
+            <button class="tab" data-tab="musica">Música</button>
+            <button class="tab" data-tab="edfisica">Ed. Física</button>
+            <button class="tab" data-tab="comparativo">Comparativo</button>
+            <button class="tab" data-tab="checklist">Checklist</button>
+        </div>
+
+        <div id="visao-geral" class="content active">
+            <h2 class="section-title">📋 Estrutura Geral - Todas as Licenciaturas</h2>
+            
+            <div class="alert alert-info">
+                <span style="font-size: 24px;">ℹ️</span>
+                <div>
+                    <strong>Base Legal:</strong> Resolução CNE/CP nº 4/2024 + DCNs específicas de cada curso<br>
+                    <strong>Prazo de adequação:</strong> até 1º de julho de 2026
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Carga Horária Total: 3.200 horas</h3>
+                <ul>
+                    <li><strong>Núcleo I - Formação Geral:</strong> 880 horas (27,5%)</li>
+                    <li><strong>Núcleo II - Aprofundamento Específico:</strong> 1.600 horas (50%)</li>
+                    <li><strong>Núcleo III - Extensão:</strong> 320 horas (10%)</li>
+                    <li><strong>Núcleo IV - Estágio Supervisionado:</strong> 400 horas (12,5%)</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-warning">
+                <span style="font-size: 24px;">⚠️</span>
+                <div>
+                    <strong>Mudanças Importantes:</strong><br>
+                    • Extinção das 400h de PCC (Prática como Componente Curricular)<br>
+                    • Estágio deve iniciar desde o 1º semestre<br>
+                    • Extensão obrigatória integrada ao currículo (320h)
+                </div>
+            </div>
+
+            <h2 class="section-title">🌐 Marco Regulatório EAD</h2>
+            
+            <div class="grid-2">
+                <div class="info-card">
+                    <h3>Licenciaturas Semipresenciais</h3>
+                    <ul>
+                        <li><strong>50% presencial obrigatório</strong> (1.600h)</li>
+                        <li>30% presencial no polo/campus</li>
+                        <li>20% presencial OU síncrono mediado</li>
+                        <li>Máximo 50% a distância assíncrono</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>Atividades SEMPRE Presenciais</h3>
+                    <ul>
+                        <li><strong>Estágio:</strong> 400h (100% presencial)</li>
+                        <li><strong>Núcleo II:</strong> 340h presenciais</li>
+                        <li>Práticas laboratoriais (Química, Biologia)</li>
+                        <li>Práticas musicais (Música)</li>
+                        <li>Práticas corporais (Ed. Física)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="alert alert-success">
+                <span style="font-size: 24px;">✅</span>
+                <div>
+                    <strong>Importante:</strong> Licenciaturas 100% EAD são VEDADAS. É obrigatório mínimo de 50% de presencialidade.
+                </div>
+            </div>
+        </div>
+
+        <div id="pedagogia" class="content">
+            <h2 class="section-title">👨‍🏫 Pedagogia</h2>
+            
+            <div class="info-card">
+                <h3>DCN Específica</h3>
+                <ul>
+                    <li><strong>Resolução CNE/CP nº 1/2006</strong></li>
+                    <li>Única licenciatura com DCN própria vigente</li>
+                    <li>Carga horária: 3.200 horas</li>
+                    <li>Licenciatura com docência como base</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Campos de Atuação</h3>
+                <ul>
+                    <li>Educação Infantil</li>
+                    <li>Anos Iniciais do Ensino Fundamental</li>
+                    <li>Gestão Educacional</li>
+                    <li>Áreas que exijam conhecimentos pedagógicos</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-info">
+                <span style="font-size: 24px;">📊</span>
+                <div>
+                    <strong>Presencialidade EAD/Semipresencial:</strong><br>
+                    • Estágio: 400h (100% presencial)<br>
+                    • Núcleo II: 340h presenciais<br>
+                    • Total mínimo: 1.600h presenciais (50%)
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Particularidades</h3>
+                <ul>
+                    <li>Formação para gestão educacional além da docência</li>
+                    <li>Base na docência da Educação Infantil e Anos Iniciais</li>
+                    <li>Estágio em diferentes contextos educacionais</li>
+                    <li>Extensão voltada para comunidades escolares</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="biologia" class="content">
+            <h2 class="section-title">🔬 Ciências Biológicas</h2>
+            
+            <div class="info-card">
+                <h3>DCN Específica</h3>
+                <ul>
+                    <li><strong>Resolução CNE/CES nº 7/2002</strong></li>
+                    <li>Parecer CNE/CES nº 1.301/2001</li>
+                    <li>DCN unificada para bacharelado e licenciatura</li>
+                    <li>Carga horária: 3.200 horas</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Conteúdos Específicos da Licenciatura</h3>
+                <ul>
+                    <li>Conhecimentos próprios das Ciências Biológicas</li>
+                    <li>Conteúdos de Química, Física e Saúde</li>
+                    <li>Formação pedagógica específica</li>
+                    <li>Instrumentação para ensino de Ciências e Biologia</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-warning">
+                <span style="font-size: 24px;">🧪</span>
+                <div>
+                    <strong>CRÍTICO - Laboratórios:</strong><br>
+                    Atividades laboratoriais são OBRIGATORIAMENTE PRESENCIAIS. Infraestrutura adequada é essencial para o funcionamento do curso.
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Orientações Práticas</h3>
+                <ul>
+                    <li>Laboratórios de Biologia obrigatoriamente presenciais</li>
+                    <li>Aulas práticas e de campo essenciais</li>
+                    <li>Estágio em ensino de Ciências (Fund.) e Biologia (Médio)</li>
+                    <li>Extensão: projetos de educação ambiental e saúde</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="letras" class="content">
+            <h2 class="section-title">📖 Letras (Português/Inglês)</h2>
+            
+            <div class="info-card">
+                <h3>DCN Específica</h3>
+                <ul>
+                    <li><strong>Resolução CNE/CES nº 18/2002</strong></li>
+                    <li>Parecer CNE/CES nº 492/2001</li>
+                    <li>Resolução CNE/CP nº 1/2011 (nova habilitação)</li>
+                    <li>Carga horária: 3.200 horas</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Habilitações</h3>
+                <ul>
+                    <li>Português</li>
+                    <li>Inglês</li>
+                    <li>Português/Inglês (dupla habilitação)</li>
+                    <li>Outras línguas (conforme DCN)</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Conteúdos Específicos</h3>
+                <ul>
+                    <li>Estudos linguísticos e literários</li>
+                    <li>Domínio do uso da língua/idioma</li>
+                    <li>Reflexão teórica sobre a linguagem</li>
+                    <li>Formação profissional para magistério</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Particularidades</h3>
+                <ul>
+                    <li>Flexibilidade para habilitações em diferentes línguas</li>
+                    <li>Possibilidade de complementação para nova habilitação</li>
+                    <li>Foco em competências comunicativas</li>
+                    <li>Laboratório de línguas (quando disponível)</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="quimica" class="content">
+            <h2 class="section-title">⚗️ Química</h2>
+            
+            <div class="info-card">
+                <h3>DCN Específica</h3>
+                <ul>
+                    <li><strong>Resolução CNE/CES nº 8/2002</strong></li>
+                    <li>Parecer CNE/CES nº 1.303/2001</li>
+                    <li>DCN unificada para bacharelado e licenciatura</li>
+                    <li>Carga horária: 3.200 horas</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Conteúdos Específicos da Licenciatura</h3>
+                <ul>
+                    <li>Química geral, orgânica, inorgânica</li>
+                    <li>Físico-química e química analítica</li>
+                    <li>Conteúdos de Física, Matemática e Biologia</li>
+                    <li>Formação pedagógica</li>
+                    <li>Instrumentação para o ensino de Química</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-danger">
+                <span style="font-size: 24px;">⚠️</span>
+                <div>
+                    <strong>CRÍTICO - Laboratórios INEGOCIÁVEIS:</strong><br>
+                    • Laboratórios presenciais são ESSENCIAIS<br>
+                    • Segurança laboratorial deve ser componente curricular<br>
+                    • Infraestrutura adequada com reagentes e equipamentos<br>
+                    • Normas de segurança rigorosamente seguidas
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Orientações Práticas</h3>
+                <ul>
+                    <li>Práticas experimentais são essenciais</li>
+                    <li>Estágio com foco em experimentação no ensino</li>
+                    <li>Extensão: projetos de divulgação científica</li>
+                    <li>Segurança laboratorial integrada ao currículo</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="musica" class="content">
+            <h2 class="section-title">🎵 Música</h2>
+            
+            <div class="info-card">
+                <h3>DCN Específica</h3>
+                <ul>
+                    <li><strong>Resolução CNE/CES nº 2/2004</strong></li>
+                    <li>Parecer CNE/CES nº 146/2002 e 195/2003</li>
+                    <li>Carga horária: 3.200 horas</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Conteúdos Específicos</h3>
+                <ul>
+                    <li>Estudos estéticos, históricos e filosóficos da música</li>
+                    <li>Instrumental, composição, regência, canto</li>
+                    <li>Conteúdos teórico-práticos relacionados ao ensino</li>
+                    <li>Formação pedagógico-musical</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-info">
+                <span style="font-size: 24px;">🎹</span>
+                <div>
+                    <strong>Infraestrutura Necessária:</strong><br>
+                    • Instrumentos musicais diversos<br>
+                    • Salas com tratamento acústico<br>
+                    • Espaços para práticas em conjunto<br>
+                    • Equipamentos de gravação e reprodução
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Particularidades</h3>
+                <ul>
+                    <li>Práticas musicais individuais e coletivas presenciais</li>
+                    <li>Recitais e apresentações como atividades formativas</li>
+                    <li>Estágio em escolas e espaços não-formais</li>
+                    <li>Extensão: projetos musicais na comunidade</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="edfisica" class="content">
+            <h2 class="section-title">⚽ Educação Física</h2>
+            
+            <div class="alert alert-danger">
+                <span style="font-size: 24px;">🔴</span>
+                <div>
+                    <strong>ATENÇÃO ESPECIAL:</strong> Educação Física tem regulamentação DIFERENCIADA de todas as outras licenciaturas. É o único curso com ingresso único (bacharelado + licenciatura).
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>DCN Específica</h3>
+                <ul>
+                    <li><strong>Resolução CNE/CES nº 6/2018</strong></li>
+                    <li>Formação com INGRESSO ÚNICO</li>
+                    <li>Carga horária: 3.200 horas</li>
+                    <li>Lei 12.089/2009 (base legal)</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Estrutura Curricular - Modelo "Y"</h3>
+                <ul>
+                    <li><strong>Etapa Comum (1º e 2º anos):</strong> 1.600h</li>
+                    <li>Formação geral em Educação Física</li>
+                    <li>Comum a bacharelado E licenciatura</li>
+                    <li>10% (160h) para nivelamento</li>
+                </ul>
+                <ul>
+                    <li><strong>Etapa Específica (3º e 4º anos):</strong> 1.600h</li>
+                    <li>LICENCIATURA: formação para magistério</li>
+                    <li>BACHARELADO: outros campos de intervenção</li>
+                    <li>10% (160h) para estudos integradores</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-warning">
+                <span style="font-size: 24px;">⚠️</span>
+                <div>
+                    <strong>Conflito Regulatório:</strong><br>
+                    • Resolução 6/2018 (Ed. Física): ingresso único<br>
+                    • Resolução 4/2024 (Licenciaturas): estrutura diferente<br>
+                    • <strong>Solução prática:</strong> Seguir Resolução 6/2018 como específica + adequar à 4/2024 no que couber
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>Estágio Curricular</h3>
+                <ul>
+                    <li>Licenciatura: 400h (conforme Resolução 4/2024)</li>
+                    <li>Obrigatoriamente presencial em ambientes escolares</li>
+                    <li>Inicia na etapa específica (3º ano)</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Infraestrutura Necessária</h3>
+                <ul>
+                    <li>Quadras esportivas</li>
+                    <li>Equipamentos esportivos diversos</li>
+                    <li>Laboratórios (anatomia, fisiologia)</li>
+                    <li>Espaços para práticas corporais</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>Dupla Formação (Tema Complexo)</h3>
+                <ul>
+                    <li>IES podem oferecer dupla formação (lic. + bac.)</li>
+                    <li>Lei 12.089/2009: proíbe duas graduações simultâneas</li>
+                    <li>Nota Técnica SERES (2024): orientações específicas</li>
+                    <li>Tema controverso - consultar assessoria jurídica</li>
+                </ul>
+            </div>
+
+            <div class="alert alert-success">
+                <span style="font-size: 24px;">💡</span>
+                <div>
+                    <strong>Orientação Prática:</strong><br>
+                    Aluno escolhe a modalidade (licenciatura ou bacharelado) após completar a etapa comum (2 anos). Práticas corporais devem ser obrigatoriamente presenciais.
+                </div>
+            </div>
+        </div>
+
+        <div id="comparativo" class="content">
+            <h2 class="section-title">📊 Tabela Comparativa dos Cursos</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>DCN Específica</th>
+                        <th>Ano</th>
+                        <th>CH Total</th>
+                        <th>Principais Observações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Pedagogia</strong></td>
+                        <td>CNE/CP 1/2006</td>
+                        <td>2006</td>
+                        <td>3.200h</td>
+                        <td>Única com DCN própria vigente</td>
+                    </tr>
+                    <tr>
+                        <td><strong>C. Biológicas</strong></td>
+                        <td>CNE/CES 7/2002</td>
+                        <td>2002</td>
+                        <td>3.200h</td>
+                        <td>Laboratórios obrigatórios</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Letras</strong></td>
+                        <td>CNE/CES 18/2002</td>
+                        <td>2002</td>
+                        <td>3.200h</td>
+                        <td>Habilitações flexíveis</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Química</strong></td>
+                        <td>CNE/CES 8/2002</td>
+                        <td>2002</td>
+                        <td>3.200h</td>
+                        <td>Laboratórios INEGOCIÁVEIS</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Música</strong></td>
+                        <td>CNE/CES 2/2004</td>
+                        <td>2004</td>
+                        <td>3.200h</td>
+                        <td>Práticas musicais presenciais</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ed. Física</strong></td>
+                        <td>CNE/CES 6/2018</td>
+                        <td>2018</td>
+                        <td>3.200h</td>
+                        <td>Ingresso único - Modelo "Y"</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 class="section-title">Presencialidade Obrigatória (EAD/Semipresencial)</h2>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Curso</th>
+                        <th>Estágio</th>
+                        <th>Núcleo II</th>
+                        <th>Outras Atividades</th>
+                        <th>Total Mínimo</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Todos os cursos</strong></td>
+                        <td>400h (100%)</td>
+                        <td>340h</td>
+                        <td>Conforme especificidade</td>
+                        <td>1.600h (50%)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Química</strong></td>
+                        <td>400h</td>
+                        <td>340h</td>
+                        <td>+ Laboratórios</td>
+                        <td>1.600h +</td>
+                    </tr>
+                    <tr>
+                        <td><strong>C. Biológicas</strong></td>
+                        <td>400h</td>
+                        <td>340h</td>
+                        <td>+ Laboratórios</td>
+                        <td>1.600h +</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Música</strong></td>
+                        <td>400h</td>
+                        <td>340h</td>
+                        <td>+ Práticas musicais</td>
+                        <td>1.600h +</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ed. Física</strong></td>
+                        <td>400h</td>
+                        <td>340h</td>
+                        <td>+ Práticas corporais</td>
+                        <td>1.600h +</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 class="section-title">Infraestrutura Específica Necessária</h2>
+            
+            <div class="grid-2">
+                <div class="info-card">
+                    <h3>🧪 Química e Biologia</h3>
+                    <ul>
+                        <li>Laboratórios equipados</li>
+                        <li>Reagentes e materiais</li>
+                        <li>Normas de segurança</li>
+                        <li>EPIs e procedimentos</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>🎵 Música</h3>
+                    <ul>
+                        <li>Instrumentos musicais</li>
+                        <li>Salas acústicas</li>
+                        <li>Espaços para grupos</li>
+                        <li>Equipamentos de áudio</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>⚽ Educação Física</h3>
+                    <ul>
+                        <li>Quadras esportivas</li>
+                        <li>Equipamentos diversos</li>
+                        <li>Laboratórios específicos</li>
+                        <li>Espaços para práticas</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3>📚 Todos os Cursos</h3>
+                    <ul>
+                        <li>Biblioteca física/digital</li>
+                        <li>AVA (se EAD)</li>
+                        <li>Salas de aula adequadas</li>
+                        <li>Recursos tecnológicos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div id="checklist" class="content">
+            <h2 class="section-title">✅ Checklist de Conformidade</h2>
+            
+            <div class="alert alert-info">
+                <span style="font-size: 24px;">💡</span>
+                <div>
+                    Use este checklist para verificar a conformidade do PPC com as DCNs e o Marco Regulatório EAD. Clique nos itens para marcá-los como concluídos.
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h3 style="margin-bottom: 15px;">📋 Resolução CNE/CP 4/2024 (Geral)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch1">
+                    <label for="ch1">Carga horária total: 3.200h</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch2">
+                    <label for="ch2">Núcleo I (Formação Geral): 880h (27,5%)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch3">
+                    <label for="ch3">Núcleo II (Específicos): 1.600h (50%)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch4">
+                    <label for="ch4">Núcleo III (Extensão): 320h (10%)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch5">
+                    <label for="ch5">Núcleo IV (Estágio): 400h (12,5%)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch6">
+                    <label for="ch6">Estágio distribuído desde o 1º semestre</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch7">
+                    <label for="ch7">Extensão integrada ao currículo (não separada)</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h3 style="margin-bottom: 15px;">📘 DCN Específica do Curso</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch8">
+                    <label for="ch8">Conteúdos específicos contemplados</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch9">
+                    <label for="ch9">Carga horária conforme DCN específica</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch10">
+                    <label for="ch10">Perfil do egresso alinhado</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch11">
+                    <label for="ch11">Competências e habilidades específicas definidas</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h3 style="margin-bottom: 15px;">🌐 Marco Regulatório EAD (Semipresencial)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch12">
+                    <label for="ch12">Mínimo 50% presencial garantido (1.600h)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch13">
+                    <label for="ch13">Estágio 100% presencial (400h)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch14">
+                    <label for="ch14">340h do Núcleo II presenciais</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch15">
+                    <label for="ch15">Distribuição clara: presencial/síncrono/assíncrono</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch16">
+                    <label for="ch16">Informação aos alunos sobre formato antes da matrícula</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch17">
+                    <label for="ch17">PPC detalhando metodologias específicas para EAD</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch18">
+                    <label for="ch18">Polos com infraestrutura adequada (se aplicável)</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h3 style="margin-bottom: 15px;">🏗️ Infraestrutura</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch19">
+                    <label for="ch19">Biblioteca física e digital adequada</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch20">
+                    <label for="ch20">AVA funcional (se EAD)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch21">
+                    <label for="ch21">Laboratórios específicos (se Química, Biologia, Ed. Física)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch22">
+                    <label for="ch22">Equipamentos específicos (se Música, Ed. Física)</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch23">
+                    <label for="ch23">Salas de aula adequadas</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h3 style="margin-bottom: 15px;">👥 Corpo Docente</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch24">
+                    <label for="ch24">Mínimo 30% mestres e doutores</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch25">
+                    <label for="ch25">Regime de trabalho adequado</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch26">
+                    <label for="ch26">Experiência docente e profissional comprovada</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch27">
+                    <label for="ch27">Formação para EAD (se aplicável)</label>
+                </div>
+            </div>
+
+            <div class="checklist">
+                <h3 style="margin-bottom: 15px;">📄 Documentação</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch28">
+                    <label for="ch28">PPC completo e atualizado</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch29">
+                    <label for="ch29">Matriz curricular detalhada</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch30">
+                    <label for="ch30">Ementas de todas as disciplinas</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch31">
+                    <label for="ch31">Regulamento de estágio</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch32">
+                    <label for="ch32">Regulamento de extensão</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch33">
+                    <label for="ch33">Cadastro e-MEC atualizado</label>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" id="ch34">
+                    <label for="ch34">Comprovantes de infraestrutura</label>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; text-align: center;">
+                <button onclick="resetChecklist()" style="padding: 15px 30px; font-size: 16px; background: #dc3545; color: white; border: none; border-radius: 10px; cursor: pointer;">
+                    🔄 Resetar Checklist
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sistema de abas
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const target = tab.dataset.tab;
+                
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+                
+                tab.classList.add('active');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+
+        // Sistema de busca
+        const searchInput = document.getElementById('searchInput');
+        
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            if (searchTerm.length < 2) {
+                contents.forEach(content => {
+                    const elements = content.querySelectorAll('.highlight');
+                    elements.forEach(el => {
+                        el.outerHTML = el.innerHTML;
+                    });
+                });
+                return;
+            }
+
+            contents.forEach(content => {
+                highlightText(content, searchTerm);
+            });
+        });
+
+        function highlightText(element, searchTerm) {
+            const walker = document.createTreeWalker(
+                element,
+                NodeFilter.SHOW_TEXT,
+                null,
+                false
+            );
+
+            const nodesToReplace = [];
+            let node;
+
+            while (node = walker.nextNode()) {
+                if (node.parentElement.tagName !== 'SCRIPT' && 
+                    node.parentElement.tagName !== 'STYLE' &&
+                    node.textContent.toLowerCase().includes(searchTerm)) {
+                    nodesToReplace.push(node);
+                }
+            }
+
+            nodesToReplace.forEach(node => {
+                const parent = node.parentElement;
+                const text = node.textContent;
+                const regex = new RegExp(`(${searchTerm})`, 'gi');
+                const newHTML = text.replace(regex, '<span class="highlight">$1</span>');
+                
+                const temp = document.createElement('span');
+                temp.innerHTML = newHTML;
+                
+                while (temp.firstChild) {
+                    parent.insertBefore(temp.firstChild, node);
+                }
+                parent.removeChild(node);
+            });
+        }
+
+        // Resetar checklist
+        function resetChecklist() {
+            const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+            checkboxes.forEach(cb => cb.checked = false);
+            alert('✅ Checklist resetado com sucesso!');
+        }
+
+        // Salvar estado dos checkboxes no localStorage
+        const checkboxes = document.querySelectorAll('.checklist input[type="checkbox"]');
+        
+        checkboxes.forEach(cb => {
+            // Carregar estado salvo
+            const saved = localStorage.getItem(cb.id);
+            if (saved === 'true') {
+                cb.checked = true;
+            }
+            
+            // Salvar quando mudar
+            cb.addEventListener('change', () => {
+                localStorage.setItem(cb.id, cb.checked);
+            });
+        });
+    </script>
+</body>
+</html>
